@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản Lý Sách - 23IT249</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        h1, h2 { color: #333; }
+        form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 400px; margin-bottom: 20px; }
+        input { display: block; width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+        button { background: #28a745; color: white; border: none; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #218838; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        footer { margin-top: 40px; text-align: center; font-weight: bold; color: #555; border-top: 1px solid #ccc; padding-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>Ứng Dụng Quản Lý Sách (Cloud Computing)</h1>
+
+    <!-- Form thêm sách mới -->
+    <form action="/add-book" method="POST">
+        <h3>Thêm Sách Mới</h3>
+        <label>Mã sản phẩm (Bắt đầu bằng tiền tố 249):</label>
+        <input type="text" name="productCode" placeholder="Ví dụ: 249SP01" required>
+        
+        <label>Tên sách:</label>
+        <input type="text" name="name" placeholder="Nhập tên sách" required>
+        
+        <label>Giá gốc (VNĐ):</label>
+        <input type="number" name="priceOriginal" placeholder="Nhập giá gốc" required>
+        
+        <button type="submit">Thêm Sách</button>
+    </form>
+
+    <!-- Danh sách hiển thị -->
+    <h2>Danh Sách Sách Trên Đám Mây</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Mã SP</th>
+                <th>Tên Sách</th>
+                <th>Giá Gốc</th>
+                <th>Giá Sau Thuế (VAT 15%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each books}}
+            <tr>
+                <td>{{this.productCode}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.priceOriginal}} VNĐ</td>
+                <td>{{this.priceWithVAT}} VNĐ</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <!-- Footer bắt buộc theo đề bài -->
+    <footer>
+        Họ tên: {{name}} | MSSV: {{mssv}} | Mức VAT áp dụng: {{vat}}
+    </footer>
+</body>
+</html>
